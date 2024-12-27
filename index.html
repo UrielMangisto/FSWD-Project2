@@ -8,6 +8,35 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
+  <div id="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul>
+        <li>🏠 Home</li>
+        <li>🔥 Popular</li>
+        <li>⭐ Favorites</li>
+        <li>🔒 Login</li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <header>
+        <input type="text" id="search" placeholder="Search for games...">
+      </header>
+      <section id="games">
+        <!-- Games will be loaded dynamically -->
+      </section>
+    </main>
+  </div>
+
+  <script src="scripts/data.js"></script>
+  <script src="scripts/auth.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>
+
+<body>
     <header>
         <h1>Welcome to the Games Website</h1>
     </header>
