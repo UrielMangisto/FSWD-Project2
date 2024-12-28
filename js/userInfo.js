@@ -9,11 +9,11 @@ const gamesData = [
     ],
   },
   {
-    gameName: "Shooter Arena",
+    gameName: "Math Quiz Master",
     players: [
-      { name: "John Doe", score: 3000, timePlayed: "10 min" },
-      { name: "Jane Smith", score: 2500, timePlayed: "12 min" },
-      { name: "Player 3", score: 1000, timePlayed: "15 min" },
+      { name: "John Doe", score: 3000},
+      { name: "Jane Smith", score: 2500},
+      { name: "Player 3", score: 1000},
     ],
   },
 ];
@@ -72,6 +72,46 @@ const renderResults = () => {
     resultsContainer.appendChild(section);
   });
 };
+
+let playerName = ""; // שם השחקן
+
+const startGame = () => {
+  // בקשת שם השחקן
+  playerName = prompt("Enter your name:");
+
+  if (!playerName) {
+    alert("Name is required to play!");
+    return;
+  }
+
+  // איפוס ערכים
+  score = 0;
+  timeLeft = 30;
+  scoreElement.textContent = score;
+  timeElement.textContent = timeLeft;
+  feedbackElement.textContent = "";
+
+  // הצגת אזורי המשחק
+  quizSection.style.display = "block";
+  footer.style.display = "block";
+  startButton.style.display = "none";
+
+  // יצירת השאלה הראשונה
+  generateQuestion();
+
+  // התחלת הטיימר
+  timer = setInterval(() => {
+    timeLeft -= 1;
+    timeElement.textContent = timeLeft;
+
+    // אם הזמן נגמר
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      endGame();
+    }
+  }, 1000);
+};
+
 
 // קריאה לפונקציה בעת טעינת הדף
 document.addEventListener("DOMContentLoaded", renderResults);
