@@ -3,40 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Game Site</title>
-    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/login.css">
+    <title>Login - Games Website</title>
 </head>
 <body>
-    <header>
-        <h1>Game Site</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
+    <header class="auth-header">
+        <img src="../images/Logo.webp" alt="Logo">
+        <h1>Games Website</h1>
     </header>
-    <main>
-        <section class="login-section">
-            <h2>Login</h2>
-            <form action="login_process.php" method="post">
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit">Login</button>
-            </form>
-            <p>Don't have an account? <a href="register.html">Register here</a></p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2023 Game Site. All rights reserved.</p>
-    </footer>
+
+    <div class="auth-box">
+        <h2>Welcome Back!</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="auth-button">Login</button>
+        </form>
+
+        <div class="auth-link">
+            Don't have an account? <a href="register.html">Register here</a>
+        </div>
+    </div>
+
+    <script type="module" src="js/loginHandler.js"></script>
 </body>
 </html>
