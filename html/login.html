@@ -8,31 +8,62 @@
 </head>
 <body>
     <header class="auth-header">
-        <img src="../images/Logo.webp" alt="Logo">
-        <h1>Games Website</h1>
+        <a href="../index.html" class="logo-link">
+            <img src="../images/Logo.webp" alt="Logo">
+            <h1>Games Website</h1>
+        </a>
     </header>
 
     <div class="auth-box">
         <h2>Welcome Back!</h2>
+        
+        <!-- Error/Success Messages -->
+        <div id="loginError" class="error-message"></div>
+        
         <form id="loginForm">
             <div class="input-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" 
+                       id="username" 
+                       name="username" 
+                       required
+                       autocomplete="username"
+                       placeholder="Enter your username">
             </div>
 
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <div class="password-input">
+                    <input type="password" 
+                           id="password" 
+                           name="password" 
+                           required
+                           autocomplete="current-password"
+                           placeholder="Enter your password">
+                           <button type="button" class="toggle-password" aria-label="Toggle password visibility">👁️</button>
+                </div>
             </div>
 
-            <button type="submit" class="auth-button">Login</button>
+            <div class="remember-me">
+                <input type="checkbox" id="rememberMe" name="rememberMe">
+                <label for="rememberMe">Remember me</label>
+            </div>
+
+            <button type="submit" id="submitButton" class="auth-button">
+                Login
+            </button>
         </form>
 
-        <div class="auth-link">
-            Don't have an account? <a href="register.html">Register here</a>
+        <div class="auth-links">
+            <div class="auth-link">
+                Don't have an account? <a href="register.html">Register here</a>
+            </div>
+            <div class="auth-link">
+                <a href="../index.html">Back to Home</a>
+            </div>
         </div>
     </div>
 
-    <script type="module" src="js/loginHandler.js"></script>
+    <script type="module" src="../js/loginHandler.js"></script>
 </body>
 </html>
