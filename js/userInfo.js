@@ -1,7 +1,7 @@
 // שליפת הנתונים מ-Local Storage או שימוש בנתונים ברירת מחדל אם אין נתונים
 let gamesData = JSON.parse(localStorage.getItem("gamesData")) || [
   {
-    gameName: "Puzzle Master",
+    gameName: "Racing Game",
     players: [
       { name: "John Doe", score: 1200 },
       { name: "Jane Smith", score: 1500 },
@@ -22,7 +22,7 @@ const renderResults = () => {
   const resultsContainer = document.getElementById("results-container");
 
   if (!resultsContainer) {
-    console.error("Element with ID 'results-container' not found.");
+    //console.error("Element with ID 'results-container' not found.");
     return;
   }
 
@@ -68,9 +68,9 @@ const renderResults = () => {
 
 
 // עדכון מערך הנתונים
-const updateGameData = (playerName, newScore) => {
+const updateGameData = (playerName, newScore, gamename) => {
   
-  const game = gamesData.find((g) => g.gameName === "Math Quiz Master");
+  const game = gamesData.find((g) => g.gameName === gamename);
 
   if (game) {
     // בדוק אם השחקן כבר קיים
