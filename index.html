@@ -5,79 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Games Website</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-  <div id="app">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="logo">
-        <img src="images/Logo4.webp" alt="Logo">
-        <span>GameSite</span>
-      </div>
-      
-      <ul>
-        <li><span class="icon">🏠</span> <span class="text">Home</span></li>
-        <li><span class="icon">🎮</span> <span class="text">Active Games</span></li>
-        <li><span class="icon">🔜</span> <span class="text">Coming Soon</span></li>
-        <li class="divider"></li>
-        <li><span class="icon">🏃</span> <span class="text">Motion Game</span></li>
-        <li><span class="icon">🧩</span> <span class="text">Logic Game</span></li>
-        <!-- This will only be visible after login -->
-        <li id="personalInfoLink" style="display: none;">
-          <span class="icon">👤</span> <span class="text">Personal Info</span>
-        </li>
-      </ul>
-    </aside>
+    <div id="app">
+        <!-- הסיידבר ייטען כאן דינמית -->
+        <main class="content">
+            <header>
+                <div class="search-container">
+                    <input type="text" id="search" placeholder="Search for games...">
+                    <button class="search-button">🔍</button>
+                </div>
+                <div class="header-buttons">
+                    <!-- Before login -->
+                    <div id="loginButton">
+                        <a href="html/login.html" class="btn btn-primary">Log in</a>
+                    </div>
+                    <!-- After login - Hidden by default -->
+                    <div id="userGreeting" style="display: none;">
+                        <span>Hi, <span id="username"></span>!</span>
+                    </div>
+                </div>
+            </header>
+            
+            <section class="welcome-banner">
+                <h1>Welcome to GameSite</h1>
+                <div class="features">
+                    <div class="feature">
+                        <span>🎮</span>
+                        <p>Challenging Games</p>
+                    </div>
+                    <div class="feature">
+                        <span>🏆</span>
+                        <p>Leaderboards</p>
+                    </div>
+                    <div class="feature">
+                        <span>🎯</span>
+                        <p>Multiple Difficulties</p>
+                    </div>
+                    <div class="feature">
+                        <span>📊</span>
+                        <p>Progress Tracking</p>
+                    </div>
+                </div>
+            </section>
 
-    <!-- Main Content -->
-    <main class="content">
-      <header>
-        <div class="search-container">
-          <input type="text" id="search" placeholder="Search for games...">
-          <button class="search-button">🔍</button>
-        </div>
-        <div class="header-buttons">
-          <!-- Before login -->
-          <div id="loginButton">
-            <a href="html/login.html" class="login">Log in</a>
-          </div>
-          <!-- After login - Hidden by default -->
-          <div id="userGreeting" style="display: none;">
-            <span>Hi, <span id="username"></span>!</span>
-          </div>
-        </div>
-      </header>
-      
-      <section class="welcome-banner">
-        <h1>Welcome to GameSite</h1>
-        <div class="features">
-          <div class="feature">
-            <span>🎮</span>
-            <p>Challenging Games</p>
-          </div>
-          <div class="feature">
-            <span>🏆</span>
-            <p>Leaderboards</p>
-          </div>
-          <div class="feature">
-            <span>🎯</span>
-            <p>Multiple Difficulties</p>
-          </div>
-          <div class="feature">
-            <span>📊</span>
-            <p>Progress Tracking</p>
-          </div>
-        </div>
-      </section>
+            <section id="games">
+                <!-- Games will be loaded dynamically -->
+            </section>
+        </main>
+    </div>
 
-      <!-- Games Section -->
-      <section id="games">
-        <!-- Games will be loaded dynamically -->
-      </section>
-    </main>
-  </div>
-
-  <!-- Scripts -->
-  <script type="module" src="./js/main.js"></script>
+    <script type="module">
+        import { loadSidebar } from './js/components.js';
+        document.addEventListener('DOMContentLoaded', loadSidebar);
+    </script>
+    <script type="module" src="./js/main.js"></script>
 </body>
 </html>

@@ -3,67 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/login.css">
     <title>Login - Games Website</title>
 </head>
 <body>
-    <header class="auth-header">
-        <a href="../index.html" class="logo-link">
-            <img src="../images/Logo.webp" alt="Logo">
-            <h1>Games Website</h1>
-        </a>
-    </header>
+    <div id="app">
+        <!-- הסיידבר ייטען כאן דינמית -->
+        <main class="content">
+            <header class="auth-header">
+                <a href="../index.html" class="logo-link">
+                    <img src="../images/Logo.webp" alt="Logo">
+                    <h1>Games Website</h1>
+                </a>
+            </header>
 
-    <div class="auth-box">
-        <h2>Welcome Back!</h2>
-        
-        <!-- Error/Success Messages -->
-        <div id="loginError" class="error-message"></div>
-        
-        <form id="loginForm">
-            <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" 
-                       id="username" 
-                       name="username" 
-                       required
-                       autocomplete="username"
-                       placeholder="Enter your username">
-            </div>
+            <div class="auth-box">
+                <h2>Welcome Back!</h2>
+                
+                <!-- Error/Success Messages -->
+                <div id="loginError" class="error-message"></div>
+                
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <input type="text" 
+                               id="username" 
+                               name="username" 
+                               required
+                               autocomplete="username"
+                               placeholder="Enter your username">
+                    </div>
 
-            <div class="input-group">
-                <label for="password">Password</label>
-                <div class="password-input">
-                    <input type="password" 
-                           id="password" 
-                           name="password" 
-                           required
-                           autocomplete="current-password"
-                           placeholder="Enter your password">
-                           <button type="button" class="toggle-password" aria-label="Toggle password visibility">👁️</button>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <div class="password-input">
+                            <input type="password" 
+                                   id="password" 
+                                   name="password" 
+                                   required
+                                   autocomplete="current-password"
+                                   placeholder="Enter your password">
+                            <button type="button" class="toggle-password" aria-label="Toggle password visibility">👁️</button>
+                        </div>
+                    </div>
+
+                    <div class="remember-me">
+                        <input type="checkbox" id="rememberMe" name="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+
+                    <button type="submit" id="submitButton" class="btn btn-primary">Login</button>
+                </form>
+
+                <div class="auth-links">
+                    <div class="auth-link">
+                        Don't have an account? <a href="register.html" class="btn-link">Register here</a>
+                    </div>
+                    <div class="auth-link">
+                        <a href="../index.html" class="btn-link">Back to Home</a>
+                    </div>
                 </div>
             </div>
-
-            <div class="remember-me">
-                <input type="checkbox" id="rememberMe" name="rememberMe">
-                <label for="rememberMe">Remember me</label>
-            </div>
-
-            <button type="submit" id="submitButton" class="auth-button">
-                Login
-            </button>
-        </form>
-
-        <div class="auth-links">
-            <div class="auth-link">
-                Don't have an account? <a href="register.html">Register here</a>
-            </div>
-            <div class="auth-link">
-                <a href="../index.html">Back to Home</a>
-            </div>
-        </div>
+        </main>
     </div>
 
+    <script type="module">
+        import { loadSidebar } from '../js/components.js';
+        document.addEventListener('DOMContentLoaded', loadSidebar);
+    </script>
     <script type="module" src="../js/loginHandler.js"></script>
 </body>
 </html>
