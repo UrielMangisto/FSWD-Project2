@@ -1,6 +1,8 @@
+import updateGameData from './userInfo.js';
+
 // הגדרות בסיסיות של המשחק
 let score = 0; // ניקוד התחלתי
-let timeLeft = 3; // זמן למשחק (בשניות)
+let timeLeft = 30; // זמן למשחק (בשניות)
 let currentQuestion = {}; // שאלה נוכחית
 let timer; // מזהה הטיימר
 
@@ -79,7 +81,7 @@ const startGame = () => {
 
   // איפוס ערכים
   score = 0;
-  timeLeft = 3;
+  timeLeft = 30;
   scoreElement.textContent = score;
   timeElement.textContent = timeLeft;
   feedbackElement.textContent = "";
@@ -115,11 +117,14 @@ const endGame = () => {
     // עדכון תוצאות השחקן במערך הנתונים
     updateGameData(playerName, score);
   
+    // שמירת הנתונים המעודכנים ב-Local Storage
+    localStorage.setItem("gamesData", JSON.stringify(gamesData));
+
     // כיבוי כפתור שליחה
     submitButton.disabled = true;
     answerInput.disabled = true;
 
-    console.log(gamesData);
+    console.log(playerName +" "+ score);
   };
   
 
