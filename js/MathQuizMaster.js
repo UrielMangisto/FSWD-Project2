@@ -115,10 +115,10 @@ const endGame = () => {
     feedbackElement.style.color = "blue";
   
     // עדכון תוצאות השחקן במערך הנתונים
-    updateGameData(playerName, score);
+    updateGameData(playerName, score, "Math Quiz Master");
   
     // שמירת הנתונים המעודכנים ב-Local Storage
-    localStorage.setItem("gamesData", JSON.stringify(gamesData));
+    //localStorage.setItem("gamesData", JSON.stringify(gamesData));
 
     // כיבוי כפתור שליחה
     submitButton.disabled = true;

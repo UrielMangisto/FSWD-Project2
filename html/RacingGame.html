@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Racing Game</title>
+  <link rel="stylesheet" href="../css/RacingGame.css">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Racing Game</h1>
+  </header>
+
+  <main>
+    <!-- אזור המשחק -->
+    <div id="game-container">
+      <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- פקדים -->
+    <div id="controls">
+      <button id="startButton">Start Game</button>
+    </div>
+    <div id="game-over-screen" style="display: none;">
+      <h2>Game Over</h2>
+      <p id="final-score"></p>
+      <button id="restartButton">Restart</button>
+      <button id="userInfoButton">View Results</button>
+    </div>
+    
+    
+  </main>
+
+  <script type="module" src="../js/RacingGame.js"></script>
+</body>
+</html>
