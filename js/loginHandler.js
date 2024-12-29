@@ -1,5 +1,5 @@
 // loginHandler.js
-import userManager from './auth.js';
+import userManager from '../js/auth.js';
 import { showNotification, setupPasswordToggles } from './utils.js';
 
 class LoginHandler {

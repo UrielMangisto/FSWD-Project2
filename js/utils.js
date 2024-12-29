@@ -16,15 +16,18 @@ export const validateEmail = (email) => {
     return re.test(email);
 };
 
-// הוספת הפונקציה החדשה
+// utils.js - גרסה מעודכנת
 export const setupPasswordToggles = () => {
     const toggleButtons = document.querySelectorAll('.toggle-password');
     toggleButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const passwordInput = this.previousElementSibling;
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+            // מחפש את ה-input בתוך אותו div של הכפתור
+            const passwordInput = this.parentElement.querySelector('input[type="password"], input[type="text"]');
+            if (passwordInput) {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+            }
         });
     });
 };
