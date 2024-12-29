@@ -8,7 +8,7 @@ class UserManager {
     // הרשמת משתמש חדש
     async register(username, password, email, fullName) {
         if (this.users[username]) {
-            throw new Error('שם משתמש כבר קיים במערכת');
+            throw new Error('Username already exists');
         }
 
         // בדיקת תקינות הסיסמה
@@ -35,7 +35,7 @@ class UserManager {
     // כניסה למערכת
     async login(username, password) {
         if (this.isUserBlocked(username)) {
-            throw new Error('המשתמש חסום. נסה שוב עוד 30 דקות');
+            throw new Error('You are blocked from logging in for 30 minutes');
         }
 
         const user = this.users[username];
@@ -43,7 +43,7 @@ class UserManager {
         
         if (!user || user.password !== hashedPassword) {
             this.recordLoginAttempt(username);
-            throw new Error('שם משתמש או סיסמה שגויים');
+            throw new Error('Username or password is incorrect');
         }
 
         delete this.loginAttempts[username];
@@ -63,16 +63,16 @@ class UserManager {
         const hasSpecial = /[!@#$%^&*]/.test(password);
         
         if (password.length < minLength) {
-            throw new Error('הסיסמה חייבת להכיל לפחות 8 תווים');
+            throw new Error('Password must be at least 8 characters long');
         }
         if (!hasNumber) {
-            throw new Error('הסיסמה חייבת להכיל לפחות מספר אחד');
+            throw new Error('Password must contain at least one number');
         }
         if (!hasLetter) {
-            throw new Error('הסיסמה חייבת להכיל לפחות אות אחת');
+            throw new Error('Password must contain at least one letter');
         }
         if (!hasSpecial) {
-            throw new Error('הסיסמה חייבת להכיל לפחות תו מיוחד אחד');
+            throw new Error('Password must contain at least one special character');
         }
     }
 
@@ -86,7 +86,6 @@ class UserManager {
             .join('');
     }
 
-    // [שאר המתודות הקיימות נשארות ללא שינוי]
     logout() {
         this.currentUser = null;
         this.clearLoginCookie();

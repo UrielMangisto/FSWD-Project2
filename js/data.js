@@ -4,7 +4,7 @@ export const gamesData = {
       id: 'play1',
       title: 'משחק תנועה',
       description: 'משחק אקשן מהיר עם אנימציות',
-      thumbnail: '../images/Logo1.webp',
+      thumbnail: '../images/Logo.webp',
       status: 'active',
       difficulty: {
           easy: { speed: 1, obstacles: 3 },
@@ -16,7 +16,7 @@ export const gamesData = {
       id: 'play2',
       title: 'משחק לוגיקה',
       description: 'משחק חשיבה מאתגר',
-      thumbnail: '../images/Logo2.webp',
+      thumbnail: '../images/Logo.webp',
       status: 'active',
       difficulty: {
           easy: { time: 180, hints: 3 },
@@ -28,14 +28,14 @@ export const gamesData = {
       id: 'comingSoon1',
       title: 'בקרוב - משחק קלפים',
       description: 'משחק קלפים חדש',
-      thumbnail: '../images/Logo3.webp',
+      thumbnail: '../images/Logo.webp',
       status: 'comingSoon'
   },
   comingSoon2: {
       id: 'comingSoon2',
       title: 'בקרוב - משחק אסטרטגיה',
       description: 'משחק אסטרטגיה מורכב',
-      thumbnail: '../images/Logo4.webp',
+      thumbnail: '../images/Logo.webp',
       status: 'comingSoon'
   }
 };

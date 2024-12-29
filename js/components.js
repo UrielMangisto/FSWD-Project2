@@ -1,6 +1,6 @@
 export async function loadSidebar() {
     try {
-        const response = await fetch('../components/sidebar.html');
+        const response = await fetch('../html/sidebar.html');
         const html = await response.text();
         
         // מחפש את ה-div עם ה-id="app"
@@ -19,9 +19,9 @@ export async function loadSidebar() {
         const logoImg = document.querySelector('.sidebar .logo img');
         if (logoImg) {
             if (currentPath.includes('/html/')) {
-                logoImg.src = '../images/Logo4.webp';
+                logoImg.src = '../images/Logo.webp';
             } else {
-                logoImg.src = 'images/Logo4.webp';
+                logoImg.src = 'images/Logo.webp';
             }
         }
 
