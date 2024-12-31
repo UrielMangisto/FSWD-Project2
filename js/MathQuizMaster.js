@@ -1,4 +1,5 @@
 import updateGameData from './userInfo.js';
+import  online  from './dataUsers.js';
 
 // הגדרות בסיסיות של המשחק
 let score = 0; // ניקוד התחלתי
@@ -68,11 +69,9 @@ const checkAnswer = () => {
 };
 
 // פונקציה להתחלת המשחק
-let playerName = ""; // שם השחקן
+let playerName = online[0].name; // שם השחקן
 
 const startGame = () => {
-  // בקשת שם השחקן
-  playerName = prompt("Enter your name:");
 
   if (!playerName) {
     alert("Name is required to play!");
