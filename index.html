@@ -104,22 +104,6 @@
             </section>
         </main>
     </div>
-
-    <script type="module">
-        import { loadSidebar } from './js/components.js';
-        
-        async function initializePage() {
-            console.log("מתחיל טעינת הסיידבר"); // הוספת לוג לבדיקה
-            try {
-                await loadSidebar();
-                console.log("הסיידבר נטען בהצלחה"); // הוספת לוג לבדיקה
-            } catch (error) {
-                console.error('שגיאה בטעינת הסיידבר:', error);
-            }
-        }
-    
-        document.addEventListener('DOMContentLoaded', initializePage);
-    </script>
     <script type="module" src="./js/main.js"></script>
 </body>
 </html>
