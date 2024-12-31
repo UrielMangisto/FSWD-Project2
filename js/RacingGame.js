@@ -1,4 +1,5 @@
 import updateGameData from './userInfo.js';
+import  online  from './dataUsers.js';
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -111,10 +112,9 @@ const updateGame = () => {
   }
 };
 
-let playerName = ""; // שם השחקן
+let playerName = online[0].name; // שם השחקן
 // התחלת המשחק
 const startGame = () => {
-  playerName = prompt("Enter your name:");
   isRunning = true;
   obstacles = [];
   score = 0;

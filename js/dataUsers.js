@@ -1,8 +1,8 @@
 let users = JSON.parse(localStorage.getItem("users")) || [
     {
         users: [
-        { name: "John Doe", password: 1234 },
-        { name: "Jane Smith", password: 1111 }
+        { name: "amir hay", password: 1234 },
+        { name: "uriel", password: 1111 }
       ],
     },
   ];
@@ -10,8 +10,8 @@ let users = JSON.parse(localStorage.getItem("users")) || [
 
   let online = JSON.parse(localStorage.getItem("online")) || [
     {
-        online: [
-        { name: "John Doe", password: 1234 }
-      ],
+        name: "uriel"
     },
   ];
+
+  export default online;
