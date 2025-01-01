@@ -1,4 +1,4 @@
-import updateGameData from './userInfo.js';
+import userManager from './auth.js';
 import  online  from './dataUsers.js';
 
 const canvas = document.getElementById("gameCanvas");
@@ -129,7 +129,7 @@ const stopGame = () => {
   isRunning = false;
 
   // עדכון נתוני המשחק
-  updateGameData(playerName, score,"Racing Game");
+  userManager.updateUserScore("Racing Game", score);
   
   // שמירת הנתונים המעודכנים ב-Local Storage
   //localStorage.setItem("gamesData", JSON.stringify(gamesData));
