@@ -1,5 +1,7 @@
 import updateGameData from './userInfo.js';
 import online from './dataUsers.js';
+import userManager from './auth.js';
+import  online  from './dataUsers.js';
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -153,6 +155,12 @@ const stopGame = () => {
   // עדכון נתוני המשחק
   updateGameData(playerName, score, "Racing Game");
 
+  userManager.updateUserScore("Racing Game", score);
+  
+  // שמירת הנתונים המעודכנים ב-Local Storage
+  //localStorage.setItem("gamesData", JSON.stringify(gamesData));
+  
+  console.log(playerName +" "+ score);
   // הצגת מסך הסיום
   const gameOverScreen = document.getElementById("game-over-screen");
   gameOverScreen.style.display = "flex";

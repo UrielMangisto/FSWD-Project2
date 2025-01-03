@@ -1,4 +1,4 @@
-import updateGameData from './userInfo.js';
+import userManager from './auth.js';
 import  online  from './dataUsers.js';
 
 // הגדרות בסיסיות של המשחק
@@ -111,7 +111,7 @@ const endGame = () => {
     feedbackElement.style.color = "blue";
   
     // עדכון תוצאות השחקן במערך הנתונים
-    updateGameData(playerName, score, "Math Quiz Master");
+    userManager.updateUserScore("Math Quiz Master", score);
   
     // שמירת הנתונים המעודכנים ב-Local Storage
     //localStorage.setItem("gamesData", JSON.stringify(gamesData));
