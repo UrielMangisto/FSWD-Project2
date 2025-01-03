@@ -1,7 +1,6 @@
 import updateGameData from './userInfo.js';
 import online from './dataUsers.js';
 import userManager from './auth.js';
-import  online  from './dataUsers.js';
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");

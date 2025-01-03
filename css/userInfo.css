@@ -1,10 +1,10 @@
 /* עיצוב ספציפי לעמוד User Info */
 
-/* מיכל טבלת המשתמשים */
-#user-info-container {
-  max-width: 800px; /* גבול רוחב מרבי */
-  min-width: 400px; /* גבול רוחב מינימלי */
-  margin: 20px auto;
+
+/* מיכל תוצאות המשחקים */
+#results-container {
+  width: 800px; /* גבול רוחב מרבי */
+  margin: 0 auto; /* מרכז את המיכל */
   padding: 20px;
   background-color: var(--background-dark);
   border-radius: 10px;
@@ -14,21 +14,24 @@
 }
 
 /* כותרת העמוד */
-h3{
-  font-size: 1.8rem;
-  text-align: start;
+h3 {
+  font-size: 2rem;
+  text-align: center; /* מרכז את הכותרת */
+  margin-bottom: 20px;
 }
-/*שם המשחק*/
-h1{
+
+/* שם המשחק */
+h1 {
   font-size: 1.8rem;
   color: var(--primary-color);
-  text-align:start; /* מרכז את הכותרת */
-  padding-left: 340px;
+  text-align: center; /* מרכז את כותרת שם המשחק */
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 /* טבלת הנתונים */
 table {
-  margin: 0 auto; /* מרכז את הטבלה */
+  margin: 20px auto; /* מרכז את הטבלה */
   border-collapse: collapse;
   background-color: #23242f;
   border-radius: 8px;
@@ -37,6 +40,7 @@ table {
   width: 90%; /* הטבלה תתפוס עד 90% מרוחב המיכל */
   max-width: 600px; /* גבול מרבי לרוחב הטבלה */
 }
+
 
 thead {
   background-color: #2c2d3a;
