@@ -1,5 +1,5 @@
 import updateGameData from './userInfo.js';
-import  online  from './dataUsers.js';
+import online from './dataUsers.js';
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -15,6 +15,8 @@ player.image.src = "../images/car.png"; // טוענים את תמונת הרכב
 let obstacles = [];
 let score = 0;
 let speed = 3;
+let difficulty = "noSelect"; 
+let obstacleFrequency = 0.03; // תדירות ברירת מחדל ליצירת מכשולים
 
 // טעינת תמונות
 const logImage = new Image();
@@ -23,13 +25,6 @@ logImage.src = "../images/log.png";
 const tireImage = new Image();
 tireImage.src = "../images/tire.png";
 
-// מבנה נתוני המשחקים
-let gamesData = [
-  {
-    gameName: "Racing Game",
-    players: [],
-  },
-];
 
 // פונקציה לציור הרקע (כביש עם נתיבים)
 const drawRoad = () => {
@@ -73,6 +68,29 @@ const drawObstacles = () => {
   });
 };
 
+// פונקציה להגדרת רמת קושי
+const setDifficulty = (selectedDifficulty) => {
+  difficulty = selectedDifficulty;
+
+  switch (difficulty) {
+    case "easy":
+      speed = 4;
+      obstacleFrequency = 0.04;
+      break;
+    case "medium":
+      speed = 5.5;
+      obstacleFrequency = 0.03;
+      break;
+    case "hard":
+      speed = 7;
+      obstacleFrequency = 0.05;
+      break;
+    default:
+      speed = 3;
+      obstacleFrequency = 0.03;
+  }
+};
+
 // עדכון המשחק
 const updateGame = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -99,7 +117,7 @@ const updateGame = () => {
     }
   });
 
-  if (Math.random() < 0.03) {
+  if (Math.random() < obstacleFrequency) {
     generateObstacle();
   }
 
@@ -112,29 +130,29 @@ const updateGame = () => {
   }
 };
 
-let playerName = online[0].name; // שם השחקן
-// התחלת המשחק
+let playerName = online[0]?.name || "Guest"; // שם השחקן
+// פונקציית התחלת המשחק
 const startGame = () => {
+  if(difficulty=="noSelect")
+    {
+      return;
+    }
   isRunning = true;
   obstacles = [];
   score = 0;
   player.x = 180;
   player.y = 500;
-  document.getElementById("game-over-screen").style.display = "none";
   updateGame();
 };
+
 
 // עצירת המשחק
 const stopGame = () => {
   isRunning = false;
 
   // עדכון נתוני המשחק
-  updateGameData(playerName, score,"Racing Game");
-  
-  // שמירת הנתונים המעודכנים ב-Local Storage
-  //localStorage.setItem("gamesData", JSON.stringify(gamesData));
-  
-  console.log(playerName +" "+ score);
+  updateGameData(playerName, score, "Racing Game");
+
   // הצגת מסך הסיום
   const gameOverScreen = document.getElementById("game-over-screen");
   gameOverScreen.style.display = "flex";
@@ -148,15 +166,35 @@ window.addEventListener("keydown", (e) => {
     player.x += 10;
 });
 
+// מאזין אירועים לכפתורי רמת הקושי
+document.querySelectorAll(".difficulty-button").forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const selectedDifficulty = e.target.getAttribute("data-difficulty");
+    setDifficulty(selectedDifficulty);
+
+    // הסתרת בחירת רמת הקושי והתחלת המשחק
+    document.getElementById("difficulty-selection").style.display = "none";
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  drawRoad();
+  drawPlayer();
+});
+
 // כפתור התחלה
 document.getElementById("startButton").addEventListener("click", startGame);
 
-// כפתור התחלה מחדש
-document.getElementById("restartButton").addEventListener("click", startGame);
 
-// מאזין אירועים לכפתור מעבר לעמוד userInfo
+// כפתור התחלה מחדש
+document.getElementById("restartButton").addEventListener("click", () => {
+  // הצגת מסך בחירת רמת הקושי
+
+  document.getElementById("difficulty-selection").style.display = "block";
+  document.getElementById("game-over-screen").style.display = "none";
+});
+
+// כפתור מעבר לעמוד תוצאות
 document.getElementById("userInfoButton").addEventListener("click", () => {
-    // נווט לעמוד userInfo.html
-    window.location.href = "../html/userInfo.html";
-  });
-  
+  window.location.href = "../html/userInfo.html";
+});

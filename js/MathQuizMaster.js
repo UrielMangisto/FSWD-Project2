@@ -48,8 +48,11 @@ const generateQuestion = () => {
 
 // פונקציה לבדוק תשובה
 const checkAnswer = () => {
+  if(  timeLeft == 30  )
+  {
+    return;
+  }
   const userAnswer = parseInt(answerInput.value, 10);
-
   // אם התשובה נכונה
   if (userAnswer === currentQuestion.answer) {
     score += 10; // תוספת ניקוד
@@ -72,12 +75,6 @@ const checkAnswer = () => {
 let playerName = online[0].name; // שם השחקן
 
 const startGame = () => {
-
-  if (!playerName) {
-    alert("Name is required to play!");
-    return;
-  }
-
   // איפוס ערכים
   score = 0;
   timeLeft = 30;

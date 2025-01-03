@@ -60,3 +60,24 @@
     cursor: pointer;
   }
   
+  #difficulty-selection {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .difficulty-button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #61dafb;
+    color: black;
+    transition: background-color 0.3s;
+  }
+  
+  .difficulty-button:hover {
+    background-color: #21a1f1;
+  }
+  

@@ -2,7 +2,8 @@
 
 /* מיכל המשחק */
 #game-container {
-    max-width: 400px;
+    width: 600px;
+    height: 300px;
     margin: auto;
     padding: 20px;
     background-color: var(--background-dark);
