@@ -12,7 +12,7 @@ class UserManager {
 
         // מאזין לפעולות המשתמש
         if (typeof window !== 'undefined') {
-            ['click', 'keypress', 'scroll', 'mousemove'].forEach(event => {
+            ['click', 'keypress', 'scroll'].forEach(event => {
                 document.addEventListener(event, () => this.resetInactivityTimer());
             });
         }
@@ -45,11 +45,11 @@ class UserManager {
                 this.logout();
                 alert('Session expired due to inactivity. Please login again.');
                 window.location.href = 'html/login.html';
-            }, 2 * 60 * 1000); // 2 דקות
+            }, 1 * 60 * 1000); // 2 דקות
             
             // מעדכן את זמן התפוגה של הקוקי
             const expires = new Date();
-            expires.setMinutes(expires.getMinutes() + 2);
+            expires.setMinutes(expires.getMinutes() + 1);
             document.cookie = `loggedInUser=${this.currentUser};expires=${expires.toUTCString()};path=/;SameSite=Strict`;
         }
     }
