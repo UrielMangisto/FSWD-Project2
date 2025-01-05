@@ -9,7 +9,58 @@
   <script src="../js/MathQuizMaster.js" type="module"></script>
 </head>
 <body>
-  <div id="game-container">
+  <div id="app">
+    <aside class="sidebar">
+      <div class="logo">
+          <a href="../index.html">
+              <img src="../images/Logo.webp" alt="Logo">
+              <span>GameSite</span>
+          </a>
+      </div>
+      
+      <!-- Navigation Links -->
+      <ul class="navigation">
+          <li>
+              <a href="../index.html">
+                  <span class="icon">🏠</span>
+                  <span class="text">Home</span>
+              </a>
+          </li>
+          <li id="profileLink" style="display: none;">
+              <a href="./userInfo.html">
+                  <span class="icon">👤</span>
+                  <span class="text">Profile</span>
+              </a>
+          </li>
+      </ul>
+  
+      <!-- Game Categories -->
+      <div class="category-label"><span class="text">Categories</span></div>
+      <ul class="categories">
+          <li>
+              <a href="../index.html?filter=active">
+                  <span class="icon">🎮</span>
+                  <span class="text">Active Games</span>
+              </a>
+          </li>
+          <li>
+              <a href="../index.html?filter=coming">
+                  <span class="icon">🔜</span>
+                  <span class="text">Coming Soon</span>
+              </a>
+          </li>
+      </ul>
+  
+      <!-- Social Links -->
+      <div class="sidebar-footer">
+          <ul class="social-links">
+              <li><a href="#" class="icon">📱</a></li>
+              <li><a href="#" class="icon">💬</a></li>
+              <li><a href="#" class="icon">📧</a></li>
+          </ul>
+      </div>
+    </aside>
+    <div id="game-container">
     <header>
       <h1>Math Quiz Master</h1>
     </header>
@@ -35,6 +86,7 @@
     </footer>
     <a href="../html/userInfo.html">score game</a>
 
+    </div>
   </div>
   <!-- <script src="../scripts/MathQuizMaster.js"></script> -->
 </body>
