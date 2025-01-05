@@ -5,11 +5,31 @@ class RegisterHandler {
         this.form = document.getElementById('registerForm');
         this.errorElement = document.getElementById('registerError');
         this.submitButton = document.getElementById('submitButton');
+        
+        // בחירת אלמנטים לסיסמה
+        this.passwordInput = document.getElementById('password');
+        this.confirmPasswordInput = document.getElementById('confirmPassword');
+        this.togglePasswordButtons = document.querySelectorAll('.toggle-password');
+        
         this.initialize();
     }
 
     initialize() {
         this.form.addEventListener('submit', this.handleSubmit.bind(this));
+        // הוספת מאזיני אירועים לשני כפתורי העין
+        this.togglePasswordButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                // מקבלים את שדה הקלט הקרוב לכפתור
+                const input = e.target.previousElementSibling;
+                this.togglePasswordVisibility(input, e.target);
+            });
+        });
+    }
+
+    togglePasswordVisibility(input, button) {
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        button.textContent = isPassword ? '🔒' : '👁️';
     }
 
     async handleSubmit(e) {

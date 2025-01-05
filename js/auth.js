@@ -8,7 +8,15 @@ class UserManager {
         this.users = JSON.parse(localStorage.getItem('users')) || [];
         this.currentUser = null;
         this.loginAttempts = JSON.parse(localStorage.getItem('loginAttempts')) || {};
-        
+        this.inactivityTimeout = null; // משתנה לטיימר
+
+        // מאזין לפעולות המשתמש
+        if (typeof window !== 'undefined') {
+            ['click', 'keypress', 'scroll', 'mousemove'].forEach(event => {
+                document.addEventListener(event, () => this.resetInactivityTimer());
+            });
+        }
+
         // בדיקת נתוני משחקים
         const gamesData = JSON.parse(localStorage.getItem('gamesData'));
         if (!gamesData) {
@@ -22,10 +30,31 @@ class UserManager {
                 alert('Session expired. Please login again.');
                 window.location.href = 'html/login.html';
             }
-        }, 30000);
+        }, 5000); //בדיקה כל 5 שניות
     }
 
-    // פונקציה חדשה לבדיקת תוקף הקוקי
+
+    // פונקציה לאיפוס הטיימר
+    resetInactivityTimer() {
+        if (this.inactivityTimeout) {
+            clearTimeout(this.inactivityTimeout);
+        }
+        
+        if (this.currentUser) {
+            this.inactivityTimeout = setTimeout(() => {
+                this.logout();
+                alert('Session expired due to inactivity. Please login again.');
+                window.location.href = 'html/login.html';
+            }, 2 * 60 * 1000); // 2 דקות
+            
+            // מעדכן את זמן התפוגה של הקוקי
+            const expires = new Date();
+            expires.setMinutes(expires.getMinutes() + 2);
+            document.cookie = `loggedInUser=${this.currentUser};expires=${expires.toUTCString()};path=/;SameSite=Strict`;
+        }
+    }
+
+    // פונקציה לבדיקת תוקף הקוקי
     checkCookieValid() {
         return document.cookie
             .split('; ')
@@ -96,11 +125,11 @@ class UserManager {
             const minutesLeft = Math.ceil((30 * 60 * 1000 - (now - attempts.timestamp)) / 60000);
             throw new Error(`החשבון נחסם. נסה שוב בעוד ${minutesLeft} דקות`);
         }
-
+     
         const user = this.users.find(u => 
             u.username === username && u.password === password
         );
- 
+     
         if (!user) {
             // עדכון ניסיונות כושלים
             attempts.count = (attempts.count || 0) + 1;
@@ -111,25 +140,30 @@ class UserManager {
             const remainingAttempts = 3 - attempts.count;
             throw new Error(`שם משתמש או סיסמה שגויים. נותרו ${remainingAttempts} נסיונות`);
         }
-
+     
         // איפוס ניסיונות כושלים אחרי התחברות מוצלחת
         delete this.loginAttempts[username];
         localStorage.setItem('loginAttempts', JSON.stringify(this.loginAttempts));
- 
+     
         user.lastLogin = new Date().toISOString();
         this.currentUser = username;
         localStorage.setItem('users', JSON.stringify(this.users));
         
-        // הגדרת cookie עם תפוגה של שעתיים
+        // הגדרת cookie והפעלת טיימר חוסר פעילות
         const expires = new Date();
-        expires.setHours(expires.getHours() + 2);
-        //expires.setMinutes(expires.getMinutes() + 2);  // ניסיון לבדיקת תקפות הקוקי
+        expires.setMinutes(expires.getMinutes() + 2);
         document.cookie = `loggedInUser=${username};expires=${expires.toUTCString()};path=/;SameSite=Strict`;
         
+        // הפעלת הטיימר הראשוני
+        this.resetInactivityTimer();
+        
         return true;
-    }
+     }
  
     logout() {
+        if (this.inactivityTimeout) {
+            clearTimeout(this.inactivityTimeout);
+        }
         this.currentUser = null;
         document.cookie = 'loggedInUser=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
     }

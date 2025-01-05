@@ -14,32 +14,72 @@ const games = [
         image: './images/Math.png',
         path: './html/MathQuizMaster.html',
         active: true
+    },
+    {
+        id: 'puzzle',
+        name: 'Puzzle Master',
+        image: './images/Puzzle_Master.png',
+        path: '#',
+        active: false
+    },
+    {
+        id: 'memory',
+        name: 'Memory Game',
+        image: './images/Memory_Game.png',
+        path: '#',
+        active: false
+    },
+    {
+        id: 'trivia',
+        name: 'Trivia Challenge',
+        image: './images/Trivia_Challenge.png',
+        path: '#',
+        active: false
+    },
+    {
+        id: 'snake',
+        name: 'Snake Classic',
+        image: './images/Snake_Classic.png',
+        path: '#',
+        active: false
     }
 ];
 
 function displayGames() {
     const gamesSection = document.getElementById('games');
     const urlParams = new URLSearchParams(window.location.search);
-    const filter = urlParams.get('filter') || 'active';
+    const filter = urlParams.get('filter');
 
     if (!gamesSection) return;
 
     gamesSection.innerHTML = '';
     
-    const filteredGames = games.filter(game => 
-        filter === 'active' ? game.active : !game.active
-    );
+    const filteredGames = filter ? 
+        games.filter(game => filter === 'active' ? game.active : !game.active) 
+        : games;  // אם אין פילטר, מחזיר את כל המשחקים
 
     filteredGames.forEach(game => {
         const gameCard = document.createElement('div');
         gameCard.className = 'game-card';
         
-        gameCard.innerHTML = `
-            <a href="${game.path}" class="game-link">
-                <img src="${game.image}" alt="${game.name}" class="game-image">
-                <h3 class="game-title">${game.name}</h3>
-            </a>
-        `;
+        if (game.active) {
+            gameCard.innerHTML = `
+                <a href="${game.path}" class="game-link">
+                    <img src="${game.image}" alt="${game.name}" class="game-image">
+                    <h3 class="game-title">${game.name}</h3>
+                </a>
+            `;
+        } else {
+            gameCard.innerHTML = `
+                <div class="game-link">
+                    <img src="${game.image}" alt="${game.name}" class="game-image">
+                    <h3 class="game-title">${game.name}</h3>
+                    <div class="coming-soon-overlay">
+                        <span>Coming Soon!</span>
+                    </div>
+                </div>
+            `;
+        }
         
         gamesSection.appendChild(gameCard);
     });
@@ -96,6 +136,19 @@ function updateGreeting(user) {
     userGreeting.style.display = 'block';
     profileLink.style.display = 'block';
     usernameSpan.textContent = user.username;
+
+    // Add logout button if it doesn't exist
+    if (!document.getElementById('logoutButton')) {
+        const logoutButton = document.createElement('button');
+        logoutButton.id = 'logoutButton';
+        logoutButton.className = 'btn btn-secondary';
+        logoutButton.textContent = 'Logout';
+        logoutButton.onclick = () => {
+            userManager.logout();
+            window.location.href = './html/login.html';
+        };
+        userGreeting.appendChild(logoutButton);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
