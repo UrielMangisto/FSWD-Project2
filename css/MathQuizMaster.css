@@ -95,3 +95,7 @@
     margin: 5px 0;
   }
   
+  a {
+    color: blueviolet;
+    text-decoration: none;
+  }
