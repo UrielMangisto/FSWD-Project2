@@ -165,10 +165,23 @@ startButton.addEventListener("click", startGame);
 
 // Listen for restart button
 restartButton.addEventListener("click", () => {
+    // Reset difficulty selection and game-over screen visibility
     difficultySelection.style.display = "block";
     gameOverScreen.style.display = "none";
     startButton.style.display = "none"; // Hide start button until difficulty is selected again
+
+    // Remove all existing obstacles from the game container
+    obstacles.forEach(obstacle => obstacle.remove());
+    obstacles = []; // Clear the obstacles array to ensure a fresh start
+
+    // Reset the player's position (optional)
+    player.style.left = `${gameContainer.clientWidth / 2 - player.offsetWidth / 2}px`;
+
+    // Reset score display
+    score = 0;
+    scoreElement.textContent = `Score: ${score}`;
 });
+
 
 // DOM content loaded actions
 document.addEventListener("DOMContentLoaded", () => {
