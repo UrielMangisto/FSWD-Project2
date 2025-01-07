@@ -60,26 +60,20 @@
       </div>
     </aside>
     <main>
-      <!-- אזור המשחק -->
       <div id="game-container">
-        <canvas id="gameCanvas"></canvas>
-      </div>
-
-      <!-- פקדים -->
-      <div id="controls">
-        <button id="startButton">Start Game</button>
-      </div>
-      <div id="game-over-screen" style="display: none;">
-        <h2>Game Over</h2>
-        <p id="final-score"></p>
-        <button id="restartButton">Restart</button>
-        <button id="userInfoButton">View Results</button>
-      </div>
-      <div id="difficulty-selection">
-        <h3>Select Difficulty</h3>
-        <button class="difficulty-button" data-difficulty="easy">Easy</button>
-        <button class="difficulty-button" data-difficulty="medium">Medium</button>
-        <button class="difficulty-button" data-difficulty="hard">Hard</button>
+        <div id="score">Score: 0</div>
+        <div id="player"></div>
+        <div id="game-over" style="display: none;">
+            Game Over! <br>
+            <div id="final-score"></div>
+            <button id="restart-button">Restart</button>
+        </div>
+        <div id="difficulty-selection">
+          <button class="difficulty-button" data-difficulty="easy">Easy</button>
+          <button class="difficulty-button" data-difficulty="medium">Medium</button>
+          <button class="difficulty-button" data-difficulty="hard">Hard</button>
+        </div>
+        <button id="start-button" style="display: none;">Start Game</button>
       </div>
     </main>
   </div>

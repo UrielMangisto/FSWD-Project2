@@ -1,5 +1,11 @@
+/**
+ * main.js
+ * Manages the display of games on the page and handles user login checks.
+ */
+
 import userManager from './auth.js';
 
+// List of games with their details
 const games = [
     {
         id: 'racing',
@@ -46,25 +52,32 @@ const games = [
     }
 ];
 
+/**
+ * Displays the games on the page.
+ * Filters games based on the "filter" query parameter (e.g., "active" games only).
+ */
 function displayGames() {
-    const gamesSection = document.getElementById('games');
+    const gamesSection = document.getElementById('games'); // Section to display games
     const urlParams = new URLSearchParams(window.location.search);
-    const filter = urlParams.get('filter');
+    const filter = urlParams.get('filter'); // Get filter from query parameters
 
     if (!gamesSection) return;
 
-    gamesSection.innerHTML = '';
-    
+    gamesSection.innerHTML = ''; // Clear existing games
+
+    // Filter games based on the query parameter
     const filteredGames = filter ? 
         games.filter(game => filter === 'active' ? game.active : !game.active) 
         : games;
 
+    // Create game cards
     filteredGames.forEach(game => {
         const gameCard = document.createElement('div');
         gameCard.className = 'game-card';
         gameCard.setAttribute('data-game-id', game.id);
         
         if (game.active) {
+            // Active game card with link and video (if available)
             gameCard.innerHTML = `
                 <a href="${game.path}" class="game-link">
                     <img src="${game.image}" alt="${game.name}" class="game-image">
@@ -75,6 +88,7 @@ function displayGames() {
                 </a>
             `;
 
+            // Add hover events for videos
             if (game.video) {
                 const video = gameCard.querySelector('video');
                 gameCard.addEventListener('mouseenter', () => {
@@ -86,6 +100,7 @@ function displayGames() {
                 });
             }
         } else {
+            // Inactive game card with "Coming Soon" overlay
             gameCard.innerHTML = `
                 <div class="game-link">
                     <img src="${game.image}" alt="${game.name}" class="game-image">
@@ -101,34 +116,14 @@ function displayGames() {
     });
 }
 
-function displayUserInfo() {
-    const userElement = document.getElementById('userInfo');
-    if (userElement) {
-        const currentUser = userManager.getCurrentUser();
-        if (currentUser) {
-            userElement.innerHTML = `
-                <div class="user-welcome">
-                    <h3>Hello ${currentUser.username}</h3>
-                    <p>Last login: ${new Date(currentUser.lastLogin).toLocaleString()}</p>
-                    <div class="user-stats">
-                        <p>Current scores: ${currentUser.scores?.length || 0}</p>
-                    </div>
-                    <button id="logoutBtn" class="logout-btn">Logout</button>
-                </div>
-            `;
-            
-            document.getElementById('logoutBtn').addEventListener('click', () => {
-                userManager.logout();
-                window.location.href = 'login.html';
-            });
-        }
-    }
-}
-
+/**
+ * Checks if a user is logged in. Redirects to the login page if not logged in.
+ */
 function checkLoginStatus() {
     const currentUser = userManager.getCurrentUser();
     if (!currentUser) {
         const currentPage = window.location.pathname.split('/').pop();
+        // Allow access only to public pages
         if (!['', 'index.html', 'login.html', 'register.html'].includes(currentPage)) {
             window.location.href = 'html/login.html';
         }
@@ -137,6 +132,10 @@ function checkLoginStatus() {
     }
 }
 
+/**
+ * Updates the greeting message and adds user-specific options in the UI.
+ * @param {object} user - The logged-in user's details.
+ */
 function updateGreeting(user) {
     const userGreeting = document.getElementById('userGreeting');
     const loginButton = document.getElementById('loginButton');
@@ -148,38 +147,34 @@ function updateGreeting(user) {
         return;
     }
     
-    loginButton.style.display = 'none';
-    userGreeting.style.display = 'block';
-    profileLink.style.display = 'block';
-    usernameSpan.textContent = user.username;
+    loginButton.style.display = 'none'; // Hide the login button
+    userGreeting.style.display = 'block'; // Show the greeting section
+    profileLink.style.display = 'block'; // Show the profile link
+    usernameSpan.textContent = user.username; // Display the username
 
-    // Add logout button if it doesn't exist
+    // Add a logout button if it doesn't exist
     if (!document.getElementById('logoutButton')) {
         const logoutButton = document.createElement('button');
         logoutButton.id = 'logoutButton';
         logoutButton.className = 'btn btn-secondary';
         logoutButton.textContent = 'Logout';
         logoutButton.onclick = () => {
-            userManager.logout();
+            userManager.logout(); // Log the user out
             window.location.href = './html/login.html';
         };
         userGreeting.appendChild(logoutButton);
     }
 }
 
+// When the page loads, check the login status and display games
 document.addEventListener('DOMContentLoaded', async () => {
     const user = userManager.getCurrentUser();
     console.log('Current user:', user);
     console.log('Games data:', JSON.parse(localStorage.getItem('gamesData')));
     if (user) {
         updateGreeting(user);
-        displayUserInfo();
     } else {
         checkLoginStatus();
     }
     displayGames();
 });
-
-export function updateGameScore(gameId, score) {
-    userManager.updateUserScore(gameId, score);
-}
