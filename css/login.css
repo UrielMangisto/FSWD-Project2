@@ -83,3 +83,11 @@ body {
     color: #7041e6;
     text-decoration: none;
 }
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    text-decoration: none;
+}

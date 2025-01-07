@@ -66,14 +66,14 @@ function displayGames() {
             gameCard.innerHTML = `
                 <a href="${game.path}" class="game-link">
                     <img src="${game.image}" alt="${game.name}" class="game-image">
-                    <h3 class="game-title">${game.name}</h3>
+                    <h3 class="active-game-title">${game.name}</h3>
                 </a>
             `;
         } else {
             gameCard.innerHTML = `
                 <div class="game-link">
                     <img src="${game.image}" alt="${game.name}" class="game-image">
-                    <h3 class="game-title">${game.name}</h3>
+                    <h3 class="soon-game-title">${game.name}</h3>
                     <div class="coming-soon-overlay">
                         <span>Coming Soon!</span>
                     </div>
