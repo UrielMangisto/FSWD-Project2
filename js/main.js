@@ -5,6 +5,7 @@ const games = [
         id: 'racing',
         name: 'Racing Game',
         image: './images/car.png',
+        video: './videos/racing.mp4',
         path: './html/RacingGame.html',
         active: true
     },
@@ -56,19 +57,34 @@ function displayGames() {
     
     const filteredGames = filter ? 
         games.filter(game => filter === 'active' ? game.active : !game.active) 
-        : games;  // אם אין פילטר, מחזיר את כל המשחקים
+        : games;
 
     filteredGames.forEach(game => {
         const gameCard = document.createElement('div');
         gameCard.className = 'game-card';
+        gameCard.setAttribute('data-game-id', game.id);
         
         if (game.active) {
             gameCard.innerHTML = `
                 <a href="${game.path}" class="game-link">
                     <img src="${game.image}" alt="${game.name}" class="game-image">
+                    ${game.video ? `<video class="game-video" loop muted preload="auto">
+                        <source src="${game.video}" type="video/mp4">
+                    </video>` : ''}
                     <h3 class="active-game-title">${game.name}</h3>
                 </a>
             `;
+
+            if (game.video) {
+                const video = gameCard.querySelector('video');
+                gameCard.addEventListener('mouseenter', () => {
+                    video.play();
+                });
+                gameCard.addEventListener('mouseleave', () => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+            }
         } else {
             gameCard.innerHTML = `
                 <div class="game-link">
