@@ -56,6 +56,7 @@ body {
   gap: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 1rem;
+  padding-left: 1rem;  /* הגדלת הריווח משמאל */
 }
 
 .sidebar .logo img {

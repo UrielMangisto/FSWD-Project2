@@ -38,7 +38,7 @@
   
   #start-game:hover {
     background-color: #5a37c9;
-    transform: scale(1.05); /* מעט מגדיל את הכפתור */
+    transform: scale(1.05); /* מגדיל קצת את הכפתור */
   }
   
   /* תיבת התשובה */
